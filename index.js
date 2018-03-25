@@ -3,6 +3,26 @@ var app = express()
 var scratchapd = require('./scratchpad');
 var api = require('./api');
 
+
+let e = new api.Employee();
+e.name = "asdrf";
+let e2 = new api.Employee();
+e2.name = "asdrfasdfasdf";
+console.log(e);
+console.log(e2);
+
+
+let ee = new api.Employee2("boo");
+let ee2 = new api.Employee2("boo", "rah");
+let ee3 = new api.Employee2("boo", "rah", "foo");
+console.log(ee);
+console.log(ee2);
+console.log(ee3);
+
+
+
+
+
 // respond with "hello world" when a GET request is made to the homepage
 
 // GET method route
