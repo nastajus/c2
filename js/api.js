@@ -29,6 +29,19 @@ module.exports = {
 		this.address = address;
 	},
 
-	employees : []
+	employees : [],
+
+	expenseItems : [],
+
+	Expense : function (employee, date, category, description, preTaxAmount, taxName, taxAmount) {
+		this.date = date;
+		this.category = category;
+		this.employeeName = employee.name;
+		this.employeeAddress = employee.address;
+		this.expenseDescription = description;
+		this.preTaxAmount = preTaxAmount;
+		this.taxName = taxName;
+		this.taxAmount = taxAmount;
+	}
 
 }

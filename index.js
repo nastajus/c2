@@ -19,7 +19,7 @@ var options = {
 	delimiter : ',', // optional
 	quote     : '"' // optional
 };
-var expenseItems = csvjson.toObject(data, options);
+var expenseItemsFile = csvjson.toObject(data, options);
 //console.log(result);
 //console.log(result[0]["date"]);
 
@@ -29,16 +29,36 @@ var expenseItems = csvjson.toObject(data, options);
 });
 */
 
-expenseItems.forEach((val, index) => {
+expenseItemsFile.forEach((val, index) => {
 	if (!utils.objectArrayHas( api.employees, "name", val["employee name"]  )) {
 		api.employees.push(new api.Employee(index, val["employee name"], val["employee address"]));
-		console.log(index + " added + " + val["employee name"] );
-	}
-	else {
-		console.log(index + " disregarding " + val["employee name"] + ", already exists.");
+		//console.log(index + " added + " + val["employee name"] );
 	}
 });
 
+expenseItemsFile.forEach((val) => {
+
+	//var employee = expenseItemsFile.find(item => item["employee name"] === val["name"]);
+
+	// var employee = expenseItemsFile.find(
+	// 	function (item) {
+	// 		return item["employee name"] === val["name"];
+	// 	}
+	// );
+
+	var employee = utils.findObjectByKey(api.employees, "name", val["employee name"]);
+
+	if (employee) {
+		api.expenseItems.push(new api.Expense(employee, val["date"], val["category"], val["expense description"], val["pre-tax amount"], val["tax name"], val["tax amount"]));
+		console.log();
+	}
+	else {
+		//throw error()
+		console.log("employee doesn't exist, cannot add employee");
+	}
+})
+
+console.log(api.expenseItems);
 
 //date,category,employee name,employee address,expense description,pre-tax amount,tax name,tax amount
 
