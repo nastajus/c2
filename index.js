@@ -31,7 +31,7 @@ var expenseItemsFile = csvjson.toObject(data, options);
 
 expenseItemsFile.forEach((val, index) => {
 	if (!utils.objectArrayHas( api.employees, "name", val["employee name"]  )) {
-		api.employees.push(new api.Employee(index, val["employee name"], val["employee address"]));
+		api.employees.push(new api.Employee(api.employees.length, val["employee name"], val["employee address"]));
 		//console.log(index + " added + " + val["employee name"] );
 	}
 });
@@ -49,8 +49,7 @@ expenseItemsFile.forEach((val) => {
 		console.log("employee doesn't exist, cannot add employee");
 	}
 })
-
-console.log(api.expenseItems);
+//console.log(api.expenseItems);
 
 //date,category,employee name,employee address,expense description,pre-tax amount,tax name,tax amount
 
@@ -113,6 +112,18 @@ app.post('/employees', function (req, res) {
 })
 
 
+app.post('/expenses', function(req, res) {
+	let employeeIdNumber = req.body.employeeName; 
+	let employee = api.employees[employeeIdNumber];
+	let expense = new api.Expense(api.expenseItems.length, employee, req.body.date, req.body.category,
+		req.body.expenseDescription, req.body.preTaxAmount, req.body.taxName, req.body.taxAmount );
+
+	api.expenseItems.push(expense);
+	res.redirect(303, '/')
+
+})
+
+
 // POST method route
 app.post('/', function (req, res) {
 	res.send('POST request to the homepage')
@@ -129,6 +140,13 @@ app.post('/example/b', function (req, res, next) {
 }, function (req, res) {
 	res.send('Hello from B!')
 })
+
+
+app.delete('/', function(req, res) {
+	console.log(req.body);
+	res.redirect(303, '/')
+});
+
 
 app.listen(3001, function () {
 	console.log('listening on port 3001');

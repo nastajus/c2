@@ -5,14 +5,36 @@
     <link rel="stylesheet" href="/style.css" type="text/html">
 </head>
 <body>
-<h1>I am ahead, ahoy!</h1>
-<div>wisdom goes here</div>
+<h1>Expense Entry Form</h1>
+<h3>enter employee here</h3>
 <form method="post" action="/employees">
     <label for="name">name: </label><input type="text" name="name" id="name">
     <label for="address">address: </label><input type="text" name="address" id="address">
     <input type="submit" value="SUBMIT POST">
     <!--<input type="reset" value="RESET FORM">-->
 </form>
+
+
+<h3>enter expense here</h3>
+<form method="post" action="/expenses">
+    <label for="employeeName">employee name: </label><select name="employeeName">
+        <option value="-1"></option>
+        <% employees.forEach((employee, index) => { %>
+        <option value="<%= employee.id %>"><%= employee.name %></option>
+        <% }); %>
+    </select><br/>
+    <label for="date">date: </label><input type="text" name="date" id=""><br/>
+    <label for="category">category: </label><input type="text" name="category" id=""><br/>
+    <label for="description">description: </label><input type="text" name="expenseDescription" id=""><br/>
+    <label for="preTaxAmount">preTaxAmount: </label><input type="text" name="preTaxAmount" id=""><br/>
+    <label for="taxName">taxName: </label><input type="text" name="taxName" id=""><br/>
+    <label for="taxAmount">taxAmount: </label><input type="text" name="taxAmount" id=""><br/>
+
+
+    <input type="submit" value="SUBMIT POST">
+    <!--<input type="reset" value="RESET FORM">-->
+</form>
+
 
 <%- include partials/employeesTable.ejs %>
 

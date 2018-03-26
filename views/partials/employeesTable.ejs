@@ -9,6 +9,9 @@
     <tr class="<%= (index % 2 == 0) ? 'odd' : 'even' %>">
         <td><%= employee.name %></td>
         <td><%= employee.address %></td>
+        <%#- include cellDelete.ejs %>
+        <%#- include("header",{title:"your_title"}) %>
+
     </tr>
     <% }); %>
     <% } %>
