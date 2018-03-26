@@ -1,0 +1,9 @@
+tr.even td {
+    background-color: #CC9999;
+    color: black;
+}
+tr.odd td {
+    background-color: #9999CC;
+    color: black;
+}
+body {background-color: red}

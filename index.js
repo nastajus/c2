@@ -1,6 +1,10 @@
 var express = require('express')
 var app = express()
 const bodyParser = require('body-parser');
+
+var EJS  = require('ejs');
+var path = require('path');
+
 var scratchapd = require('./scratchpad');
 var api = require('./api');
 
@@ -19,7 +23,22 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 app.use(urlencodedParser);
 app.use(bodyParser.json());
 
+app.engine('html', EJS.renderFile);
+
+
+// Set the default templating engine to ejs
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// ejs
+app.get('/', function (req, res) {
+	res.render('index.ejs', { employees: api.employees });
+});
+
+
+
 // GET method route
+/*
 app.get('/', function (req, res) {
 	//res.send('GET request to the homepage')
 	res.sendFile('index.html', {root: __dirname })
@@ -29,6 +48,7 @@ app.get('/', function (req, res) {
 	//res.send(new Buffer('<h2>Test String</h2>'));
 
 })
+*/
 
 app.post('/employees', function (req, res) {
 	let employee = new api.Employee(api.employees.length, req.body.name, req.body.address);

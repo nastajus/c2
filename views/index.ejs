@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>i am title</title>
+    <link rel="stylesheet" href="/style.css" type="text/html">
+</head>
+<body>
+<h1>I am ahead, ahoy!</h1>
+<div>wisdom goes here</div>
+<form method="post" action="/employees">
+    <label for="name">name: </label><input type="text" name="name" id="name">
+    <label for="address">address: </label><input type="text" name="address" id="address">
+    <input type="submit" value="SUBMIT POST">
+    <!--<input type="reset" value="RESET FORM">-->
+</form>
+
+<%- include partials/employeesTable.ejs %>
+
+</body>
+</html>
