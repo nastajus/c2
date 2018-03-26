@@ -38,19 +38,11 @@ expenseItemsFile.forEach((val, index) => {
 
 expenseItemsFile.forEach((val) => {
 
-	//var employee = expenseItemsFile.find(item => item["employee name"] === val["name"]);
-
-	// var employee = expenseItemsFile.find(
-	// 	function (item) {
-	// 		return item["employee name"] === val["name"];
-	// 	}
-	// );
-
 	var employee = utils.findObjectByKey(api.employees, "name", val["employee name"]);
 
 	if (employee) {
-		api.expenseItems.push(new api.Expense(employee, val["date"], val["category"], val["expense description"], val["pre-tax amount"], val["tax name"], val["tax amount"]));
-		console.log();
+		api.expenseItems.push(new api.Expense(api.expenseItems.length, employee, val["date"], val["category"], val["expense description"], val["pre-tax amount"], val["tax name"], val["tax amount"]));
+		//console.log();
 	}
 	else {
 		//throw error()
@@ -85,7 +77,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // ejs
 app.get('/', function (req, res) {
-	res.render('index.ejs', { employees: api.employees });
+	res.render('index.ejs', { employees: api.employees, expenses: api.expenseItems });
 });
 
 

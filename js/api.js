@@ -33,7 +33,8 @@ module.exports = {
 
 	expenseItems : [],
 
-	Expense : function (employee, date, category, description, preTaxAmount, taxName, taxAmount) {
+	Expense : function (id, employee, date, category, description, preTaxAmount, taxName, taxAmount) {
+		this.id = id;
 		this.date = date;
 		this.category = category;
 		this.employeeName = employee.name;
