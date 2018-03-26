@@ -6,11 +6,11 @@
 <body>
 <h1>I am ahead, ahoy!</h1>
 <div>wisdom goes here</div>
-<form method="POST">
+<form method="post" action="/employees">
+    <label for="name">name: </label><input type="text" name="name" id="name">
+    <label for="address">address: </label><input type="text" name="address" id="address">
     <input type="submit" value="SUBMIT POST">
     <!--<input type="reset" value="RESET FORM">-->
 </form>
-<form method="POST" action="/example/a"><input type="submit" value="post /example/a"></form>
-<form method="POST" action="/example/b"><input type="submit" value="post /example/b"></form>
 </body>
 </html>

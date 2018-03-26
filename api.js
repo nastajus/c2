@@ -28,16 +28,18 @@ module.exports = {
 	//post?
 	//put?
 
-	Employee : function () {
-		this.id;
-		this.name;
-		this.address;
-	},
+	// Employee : function () {
+	// 	this.id;
+	// 	this.name;
+	// 	this.address;
+	// },
 
-	Employee2 : function (name, address) {
-		this.id;
+	Employee : function(id, name, address){
+		this.id = id;
 		this.name = name;
 		this.address = address;
-	}
+	},
+
+	employees : []
 
 }
