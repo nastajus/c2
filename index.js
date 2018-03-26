@@ -9,8 +9,9 @@ var fs = require('fs');
 var csvjson = require('csvjson');
 
 
-var scratchapd = require('./scratchpad');
-var api = require('./api');
+var scratchapd = require('./js/scratchpad');
+var api = require('./js/api');
+var utils = require ('./js/utils')
 
 
 var data = fs.readFileSync('./data/data_example.csv', { encoding : 'utf8'});
@@ -20,7 +21,38 @@ var options = {
 };
 var result = csvjson.toObject(data, options);
 //console.log(result);
+//console.log(result[0]["date"]);
 
+/*
+[].forEach((val, index)=>{
+...
+});
+*/
+
+result.forEach((val, index) => {
+	//if( typeof(api.employees[val["employee name"]]) == "undefined") {
+	//if ( utils.containsObject(val["employee name"], api.employees) ) {
+	//if ( utils.objectsAreSame() ) {
+	//let hasEmployeeName = api.employees.some( employees => employees['employee name'] === val['employee name'] )
+	/*var isThere = api.employees.some(function(element) {
+		return element["employee name"] == val["employee name"];
+	});*/
+
+
+	if (utils.objectArrayHas( api.employees, "name", val["employee name"]  )) {
+		console.log(index + " disregarding " + val["employee name"] + ", already exists.");
+	}
+	else {
+		// console.log(index + " oh")
+		// console.log(val["employee name"]);
+		// console.log(api.employees[val["employee name"]]);
+		// console.log(typeof(api.employees[val["employee name"]]));
+		api.employees.push(new api.Employee(index, val["employee name"], val["employee address"]));
+		console.log(index + " added + " + val["employee name"] );
+
+	}
+});
+//date,category,employee name,employee address,expense description,pre-tax amount,tax name,tax amount
 
 // respond with "hello world" when a GET request is made to the homepage
 
