@@ -5,8 +5,45 @@ const bodyParser = require('body-parser');
 var EJS  = require('ejs');
 var path = require('path');
 
+var fs = require('fs');
+var parse = require('csv-parse');
+
+
 var scratchapd = require('./scratchpad');
 var api = require('./api');
+
+
+
+/*
+var csvContent;
+// First I want to read the file
+fs.readFile('./data/data_example.csv', function read(err, data) {
+	if (err) {
+		throw err;
+	}
+	csvContent = data;
+
+	// Invoke the next step here however you like
+	console.log(csvContent);   // Put all of the code here (not the best solution)
+});
+*/
+
+
+var csvData=[];
+fs.createReadStream('./data/data_example.csv')
+	.pipe(parse({delimiter: ','}))
+	.on('data', function(csvrow) {
+		console.log(csvrow);
+		//do something with csvrow
+		csvData.push(csvrow);
+	})
+	.on('end',function() {
+		//do something wiht csvData
+		console.log(csvData);
+	});
+
+
+
 
 
 // respond with "hello world" when a GET request is made to the homepage
