@@ -1,16 +1,5 @@
 module.exports = {
-	methods: Object.freeze({
-		"GET": {name: "GET"},
-		"POST": {name: "POST"},
-		"PUT": {name: "PUT"},
-		"DELETE": {name: "DELETE"}
-	}),
-	/*
-	fragments: Object.freeze({
-		"employees": {name: "employees"},
-		"expenses": {name: "expenses"}
-	}),
-	*/
+
 	getEmployees: { method: "GET", path: "/employees", desc: "get a list of all employees (sorted in order added by default)" },
 	postEmployee: { method: "POST", path: "/employees", desc: "post a single employee [add new employee]" },
 	putEmployee: { method: "PUT", path: "/employees", desc: "put a single employee (idempotent) [update existing employee]" },
