@@ -7,6 +7,8 @@ var path = require('path');
 
 var fs = require('fs');
 var parse = require('csv-parse');
+var csv = require('csvtojson');
+var csvjson = require('csvjson');
 
 
 var scratchapd = require('./scratchpad');
@@ -29,6 +31,7 @@ fs.readFile('./data/data_example.csv', function read(err, data) {
 */
 
 
+/*
 var csvData=[];
 fs.createReadStream('./data/data_example.csv')
 	.pipe(parse({delimiter: ','}))
@@ -41,9 +44,24 @@ fs.createReadStream('./data/data_example.csv')
 		//do something wiht csvData
 		console.log(csvData);
 	});
+*/
 
+/*
+// Parse large csv with stream / pipe (low mem consumption)
+csv()
+	.fromFile('./data/data_example.csv')
+	.on("json",function(jsonObj){ //single json object will be emitted for each csv line
+		console.log(jsonObj);
+	})
+*/
 
-
+var data = fs.readFileSync('./data/data_example.csv', { encoding : 'utf8'});
+var options = {
+	delimiter : ',', // optional
+	quote     : '"' // optional
+};
+var result = csvjson.toObject(data, options);
+console.log(result);
 
 
 // respond with "hello world" when a GET request is made to the homepage
